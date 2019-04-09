@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xjhxjhxjhxjh.com.github.mapper.StudentMapper">
+    <resultMap type="Student" id="selCourseMessageMap">
+        <id property="sId" column="sId"/>
+        <result property="sName" column="sName"/>
+        <result property="sPassword" column="sPassword"/>
+        <collection property="sList" ofType="message">
+            <result column="sId" property="sId"/>
+            <result column="tId" property="tId"/>
+            <result column="cId" property="cId"/>
+            <result column="gScore" property="gScore"/>
+            <result column="sName" property="sName"/>
+            <result column="tName" property="tName"/>
+            <result column="cName" property="cName"/>
+            <result column="cPlace" property="cPlace"/>
+        </collection>
+    </resultMap>
+    <select id="selCourseMessage" parameterType="Integer" resultMap="selCourseMessageMap">
+        select * from student s join grade g on s.sid = g.gsid 
+        join teacher t on t.tid =  g.gtid 
+        join course c on g.gcid = c.cid 
+        where sId = #{sId}
+    </select>
+</mapper>

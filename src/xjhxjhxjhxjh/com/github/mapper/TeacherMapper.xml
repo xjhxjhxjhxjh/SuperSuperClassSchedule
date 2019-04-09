@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xjhxjhxjhxjh.com.github.mapper.TeacherMapper">
+    <resultMap type="teacher" id="selCourseMessageMap">
+        <id column="tId" property="tId"/>
+        <result column="tName" property="tName"/>
+        <result column="tPassword" property="tPassword"/>
+        <collection property="tList" ofType="message">
+            <result column="cId" property="cId"/>
+            <result column="cName" property="cName"/>
+            <result column="cPlace" property="cPlace"/>
+        </collection>
+    </resultMap>
+    <select id="selCourseMessage" parameterType="Integer" resultMap="selCourseMessageMap">
+        select * from Teacher t join Grade g on t.tid = g.gtid 
+        join Course c on g.gcid = c.cid 
+        where tId = #{tId}
+    </select>
+    
+    <resultMap type="Message" id="selStudentBytIdAndcIdMap">
+        <result column="cId" property="cId"/>
+        <result column="cName" property="cName"/>
+        <result column="sId" property="sId"/>
+        <result column="sName" property="sName"/>
+        <result column="gScore" property="gScore"/>
+        <result column="tName" property="tName"/>
+    </resultMap>
+    <select id="selStudentBytIdAndcId" parameterType="Integer" resultMap="selStudentBytIdAndcIdMap">
+        select * from Grade g join Teacher t on t.tid = g.gTid
+        join Student s on s.sid = g.gSid 
+        join Course c on c.cId = g.gCid
+        where tId = #{0} and cId = #{1};
+    </select>
+    
+    <resultMap type="Message" id="selApplyListMap">
+         <result column="sId" property="sId"/>
+         <result column="sName" property="sName"/>
+         <result column="cId" property="cId"/>
+         <result column="cName" property="cName"/>
+         <result column="aTId" property="tId"/>
+    </resultMap>
+    <select id="selApplyList" parameterType="Integer" resultMap="selApplyListMap">
+        select * from Apply a join student s on s.sId = a.aSId 
+        join Course c on c.cId = a.aCId
+        where aTid = #{0}
+    </select>
+</mapper>
