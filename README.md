@@ -2,7 +2,7 @@
 
 A project to consolidate SSM
 
-This is a JABVAWeb project for course management. This project has two modules: the teacher module and the student module.
+This is a JAVAWeb project for course management. This project has two modules: the teacher module and the student module.
 The functions of the student module are as follows: 
 	1. Query your own course information.
 	2. Query information about the start of the semester.
